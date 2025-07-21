@@ -6,7 +6,7 @@ interface ITypography extends VariantProps<typeof typographyVariants> {
   className?: string;
 }
 
-const typographyVariants = cva("text-stone-800", {
+const typographyVariants = cva("text-stone-800 dark:text-stone-100", {
   variants: {
     variant: {
       default: "",
@@ -16,6 +16,8 @@ const typographyVariants = cva("text-stone-800", {
       ["2xl"]: "text-[40px]",
       ["xl"]: "text-[32px]",
       ["medium"]: "text-[15px]",
+      ["medium-x"]: "text-[18px]",
+
       ["regular"]: "text-sm",
       ["xs"]:"text-xs"
     },
