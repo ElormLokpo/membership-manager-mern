@@ -9,6 +9,8 @@ interface IButton extends VariantProps<typeof buttonVariants> {
   text?: string;
   isLoading?: boolean;
   loadingText?: string;
+  buttonType?: "submit" | "reset" | "button" | undefined;
+  handler?: () => void;
 }
 
 const buttonVariants = cva(
@@ -34,19 +36,25 @@ export const Button = ({
   text,
   isLoading,
   loadingText,
+  buttonType = "button",
+  handler,
 }: IButton) => {
   return (
-    <button className={cn(buttonVariants({ variant }), className)}>
+    <button
+      onClick={handler}
+      type={buttonType}
+      className={cn(buttonVariants({ variant }), className)}
+    >
       {isLoading ? (
         <span className="flex gap-2 items-center">
           <Loader loading={true} />
           {loadingText}
         </span>
       ) : (
-        <>
+        <div className="flex gap-2 items-center">
           {icon && icon}
           {text && text}
-        </>
+        </div>
       )}
     </button>
   );
