@@ -1,7 +1,7 @@
 package app.membership.models.enums;
 
 public enum RolesEnum {
-    ADMIN,
-    FRONTDESK,
-    MEMBER
+    ROLE_ADMIN,
+    ROLE_FRONTDESK,
+    ROLE_MEMBER
 }

@@ -54,7 +54,7 @@ public class AuthServiceImpl implements AuthServiceDao {
         UserModel userFinal = AuthUserMapper.INSTANCE.registerUserDtoToModel(request);
         if (request.getRoles().isEmpty()) {
             HashSet<RolesEnum> defaultRoles = new HashSet<RolesEnum>();
-            defaultRoles.add(RolesEnum.ADMIN);
+            defaultRoles.add(RolesEnum.ROLE_ADMIN);
 
             userFinal.setRoles(defaultRoles);
         } else {

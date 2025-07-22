@@ -19,7 +19,8 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(customizer -> customizer.disable())
+        return http.cors(Customizer.withDefaults())
+                .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(
                         request -> request.requestMatchers(
                                 "/api/v1/membership/auth/ping",
@@ -35,6 +36,7 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
+                //Authorization flow
     }
 
     @Bean
