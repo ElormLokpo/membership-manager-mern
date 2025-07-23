@@ -22,7 +22,6 @@ public class JwtGenerator {
     @Value("${jwtSecret}")
     private String jwtSecret;
 
- 
     public String generateToken(String subject) {
         Map<String, Object> claims = new HashMap<>();
 
@@ -31,7 +30,7 @@ public class JwtGenerator {
                 .add(claims)
                 .subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30))
+                .expiration(new Date(System.currentTimeMillis() + 48 * 60 * 60 * 1000))
                 .and()
                 .signWith(getKey())
                 .compact();
