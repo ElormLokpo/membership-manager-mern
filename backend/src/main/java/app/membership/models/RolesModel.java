@@ -16,4 +16,5 @@ public class RolesModel {
 
     @Enumerated(EnumType.STRING)
     private RolesEnum role;
+    //add ROLE_ prefix for authorization.
 }

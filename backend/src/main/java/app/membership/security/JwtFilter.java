@@ -28,6 +28,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String token = extractToken(request);
 
+       
+
         if (StringUtils.hasText(token)) {
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtGenerator.extractSubject(token));
 

@@ -54,7 +54,7 @@ public class AuthServiceImpl implements AuthServiceDao {
         UserModel userFinal = AuthUserMapper.INSTANCE.registerUserDtoToModel(request);
         if (request.getRoles().isEmpty()) {
             HashSet<RolesEnum> defaultRoles = new HashSet<RolesEnum>();
-            defaultRoles.add(RolesEnum.ADMIN);
+            defaultRoles.add(RolesEnum.ROLE_ADMIN);
 
             userFinal.setRoles(defaultRoles);
         } else {
@@ -76,8 +76,8 @@ public class AuthServiceImpl implements AuthServiceDao {
         authUserDto.setToken(jwtGenerator.generateToken(userModel.getEmail()));
 
         String userVerifyToken = jwtGenerator.generateToken(userModel.getEmail());
-        emailService.sendVerifyMail(userModel.getEmail(),
-                String.format("http://localhost:8080/api/v1/membership/auth/verify-user/%s", userVerifyToken));
+        // emailService.sendVerifyMail(userModel.getEmail(),
+        //         String.format("http://localhost:8080/api/v1/membership/auth/verify-user/%s", userVerifyToken));
 
         return AuthResponseDto.builder()
                 .success(true)
