@@ -3,7 +3,7 @@
 export const DashboardPage = ()=>{
     return(
         <div>
-            Dashboard Page.
+            Dashboard Page. CHANGES
         </div>
     )
 }
