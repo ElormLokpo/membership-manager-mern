@@ -11,7 +11,7 @@ export const routes = {
   ["auth.register"]: "/register",
 };
 
-export const sideNavRoutesTop = (searchHandler, notificationsHandler) => [
+export const sideNavRoutesTop = (searchHandler:unknown, notificationsHandler:unknown) => [
   {
     text: "Search",
     route: "/",
