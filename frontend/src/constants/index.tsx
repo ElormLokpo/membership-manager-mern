@@ -9,9 +9,17 @@ import { RiSettings4Line } from "react-icons/ri";
 export const routes = {
   ["auth.login"]: "/login",
   ["auth.register"]: "/register",
+  dashboard: "/dashboard",
+  staff: "/dashboard/staff",
+  members: "/dashboard/members",
+  transactions: "/dashboard/transactions",
+  settings: "/dashboard/settings",
 };
 
-export const sideNavRoutesTop = (searchHandler:unknown, notificationsHandler:unknown) => [
+export const sideNavRoutesTop = (
+  searchHandler: unknown,
+  notificationsHandler: unknown
+) => [
   {
     text: "Search",
     route: "/",
@@ -29,28 +37,27 @@ export const sideNavRoutesTop = (searchHandler:unknown, notificationsHandler:unk
 export const adminMainSideNavRoutes = [
   {
     text: "Dashboard",
-    route: "/",
+    route: routes.dashboard,
     icon: <GrAppsRounded />,
-    handler: null,
   },
   {
     text: "Staff",
-    route: "/",
+    route: routes.staff,
     icon: <PiBriefcase />,
   },
   {
     text: "Members",
-    route: "/",
+    route: routes.members,
     icon: <HiOutlineUsers />,
   },
   {
     text: "Transactions",
-    route: "/",
+    route: routes.transactions,
     icon: <PiMoney />,
   },
   {
     text: "Settings",
-    route: "/",
+    route: routes.settings,
     icon: <RiSettings4Line />,
   },
 ];

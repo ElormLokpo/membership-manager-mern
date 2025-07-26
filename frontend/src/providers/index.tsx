@@ -1,3 +1,4 @@
+import { ModalProvider } from "./modal-provider";
 import { QueryProvider } from "./query-provider";
 import { ReduxProvider } from "./redux-provider";
 import { RouterProvider } from "./route-provider";
@@ -9,9 +10,11 @@ export const RootProvider = () => {
       <ReduxProvider>
         <QueryProvider>
           <ThemeProvider>
-            <RouterProvider>
-              <div>Root Provider</div>
-            </RouterProvider>
+            <ModalProvider>
+              <RouterProvider>
+                <></>
+              </RouterProvider>
+            </ModalProvider>
           </ThemeProvider>
         </QueryProvider>
       </ReduxProvider>
