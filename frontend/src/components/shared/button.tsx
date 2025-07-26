@@ -21,6 +21,8 @@ const buttonVariants = cva(
         auth: "bg-stone-900 hover:bg-stone-800 text-stone-100 py-3 font-semibold",
         secondary:
           "bg-lime-500 text-stone-800 font-semibold py-3 hover:bg-lime-400",
+        outline: "border rounded-md px-1",
+        ["table-add"]:"border rounded-md px-3 py-2 hover:dark:bg-lime-600 bg-stone-900 text-stone-100 dark:bg-lime-500 dark:text-black font-semibold text-xs"
       },
     },
     defaultVariants: {

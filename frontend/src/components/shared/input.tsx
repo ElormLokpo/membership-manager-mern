@@ -19,6 +19,7 @@ interface IInput<T extends FieldValues>
   name: Path<T>;
   fieldType?: string;
   placeholder?: string;
+  icon?: ReactElement;
 }
 
 const inputVariants = cva(
@@ -27,6 +28,7 @@ const inputVariants = cva(
     variants: {
       variant: {
         auth: `py-3 `,
+        searchTable: `py-1 flex items-center gap-2`,
       },
     },
     defaultVariants: {
@@ -45,6 +47,7 @@ export const Input = <T extends FieldValues>({
   errors,
   fieldType = "text",
   placeholder,
+  icon,
 }: IInput<T>) => {
   const inputTypes: Record<string, ReactElement> = {
     text: (
@@ -77,6 +80,12 @@ export const Input = <T extends FieldValues>({
             </p>
           </span>
         )}
+      </div>
+    ),
+    search: (
+      <div className={cn(inputVariants({ variant }), className)}>
+        {icon}
+        <input className="w-full py-1 focus:outline-none" placeholder={placeholder} />
       </div>
     ),
   };

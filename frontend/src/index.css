@@ -127,4 +127,20 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  :root {
+    --chart-1: oklch(89.7% 0.196 126.665);
+    --chart-2: oklch(84.1% 0.238 128.85);
+    --chart-3: oklch(76.8% 0.233 130.85);
+    --chart-4: oklch(64.8% 0.2 131.684);
+    --chart-5: oklch(53.2% 0.157 131.589);
+  }
+
+  .dark {
+    --chart-1: oklch(89.7% 0.196 126.665);
+    --chart-2: oklch(84.1% 0.238 128.85);
+    --chart-3: oklch(76.8% 0.233 130.85);
+    --chart-4: oklch(64.8% 0.2 131.684);
+    --chart-5: oklch(53.2% 0.157 131.589);
+  }
 }
