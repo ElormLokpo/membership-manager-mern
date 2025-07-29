@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                                 "/api/v1/membership/ping")
                                 .permitAll()
 
-                                .requestMatchers("\"/api/v1/membership/admin").hasRole("ADMIN")
+                                .requestMatchers("\"/api/v1/membership/admin/**").hasRole("ADMIN")
                                 .requestMatchers("\"/api/v1/membership/frontdesk").hasAnyRole("ADMIN", "FRONTDESK")
                                 .requestMatchers("\"/api/v1/membership/member")
                                 .hasAnyRole("ADMIN", "FRONTDESK", "MEMBER")
