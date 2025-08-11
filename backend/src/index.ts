@@ -9,10 +9,8 @@ import {
 import {
   AuthorizationMiddleware,
   AuthTokenMiddleware,
-} from "./middleware/auth.middleware.ts";
-import { ErrorMiddleware } from "./middleware/error.middleware.ts";
-import { UserRoleType } from "./dtos/auth.dto";
-import { role } from "./models/userModel.ts";
+  ErrorMiddleware,
+} from "./middleware";
 
 dotenv.config();
 

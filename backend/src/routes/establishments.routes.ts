@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { GetAllEstablishments } from "../controllers";
+import { CreateEstablishment, GetAllEstablishments } from "../controllers";
 
 export const router = Router();
 
-router.get("/all", GetAllEstablishments)
+router.get("/all", GetAllEstablishments);
+router.post("/add", CreateEstablishment);
 
 export default router;
