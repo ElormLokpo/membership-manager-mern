@@ -29,7 +29,7 @@ export const EstablishmentModel = table("establishments", {
   }>(),
   establishmentStatus: establishmentStatus().default("ACTIVE"),
   operatingHours: t.varchar(),
-  ownerId: t.uuid(),
+  ownerId: t.uuid().references(() => UserModel.id),
   capacityMetrics: t
     .jsonb("capacityMetrics")
     .$type<{ maxMembers: string; maxDailyVisitors: string }>(),

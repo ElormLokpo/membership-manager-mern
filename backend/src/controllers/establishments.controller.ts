@@ -1,17 +1,24 @@
 import { Request, Response, NextFunction } from "express";
-import { ResponseHandler } from "../handlers";
+import { CustomError, ResponseHandler } from "../handlers";
 import { StatusCodes } from "../utils";
-import { CreateEstablishmentType } from "../dtos";
-import { createEstablishmentService } from "../services";
+import { CreateEstablishmentType, IGetParams } from "../dtos";
+import {
+  createEstablishmentService,
+  getAllEstablishmentsService,
+} from "../services";
 
 export const GetAllEstablishments = async (
-  req: Request,
+  req: Request<{}, {}, {}, IGetParams>,
   res: Response,
   next: NextFunction
 ) => {
-  return new ResponseHandler(res).successHandler(
+  
+  const establishmentData = await getAllEstablishmentsService(req.query);
+
+  return new ResponseHandler(res).successDataHandler(
     StatusCodes.Success,
-    "All establishments query successful."
+    "All establishments query successful.",
+    establishmentData
   );
 };
 
@@ -22,7 +29,13 @@ export const CreateEstablishment = async (
 ) => {
   const establishmentData = await createEstablishmentService(req.body);
 
-  console.log("POST RETURN DATA", establishmentData);
+  if (establishmentData instanceof CustomError) {
+    return new ResponseHandler(res).errorHandler(
+      establishmentData.statusCode,
+      establishmentData.message
+    );
+  }
+
   return new ResponseHandler(res).successHandler(
     StatusCodes.Created,
     "Establishment created successfully."

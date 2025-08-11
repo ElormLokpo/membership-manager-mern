@@ -41,6 +41,6 @@ APP.use(
   checkins_routes
 );
 
-APP.use(ErrorMiddleware);
+// APP.use(ErrorMiddleware);
 
 APP.listen(PORT, () => console.log(`Server running on PORT:${PORT}`));
