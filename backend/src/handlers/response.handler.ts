@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { StatusCodes } from "../utils/statusCodes";
+import { StatusCodes } from "../utils";
 
 export class ResponseHandler {
   constructor(public res: Response) {}

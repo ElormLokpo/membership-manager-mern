@@ -1,18 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import {
-  loginUserService,
-  registerUserService,
-} from "../services/auth.service";
-import { ResponseHandler } from "../handlers/response.handler";
+import { loginUserService, registerUserService } from "../services";
+import { ResponseHandler, CustomError } from "../handlers";
 import {
   IAuthResponse,
   ILoginUser,
   IRegisterUser,
   UserRoleType,
-} from "../dtos/auth.dto";
-import { CustomError } from "../handlers/error.handlers";
-import { StatusCodes } from "../utils";
-import { generateToken } from "../utils/jwtGenerator";
+} from "../dtos";
+
+import { StatusCodes, generateToken } from "../utils";
 
 export const registerController = async (
   req: Request<{}, {}, IRegisterUser>,
@@ -34,6 +30,7 @@ export const registerController = async (
     const responseData: IAuthResponse = {
       token,
       user: {
+        id: registerUserData[0].id,
         fullname: registerUserData[0].fullname,
         email: registerUserData[0].email,
         role: registerUserData[0].role,
@@ -70,6 +67,7 @@ export const loginController = async (
     const responseData: IAuthResponse = {
       token,
       user: {
+        id: loginUserData[0].id,
         fullname: loginUserData[0].fullname,
         email: loginUserData[0].email,
         role: loginUserData[0].role,
