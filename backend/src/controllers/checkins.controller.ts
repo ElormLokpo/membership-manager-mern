@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ResponseHandler } from "../handlers/response.handler";
+import { ResponseHandler } from "../handlers";
 import { StatusCodes } from "../utils";
 
 export const GetAllCheckins = (

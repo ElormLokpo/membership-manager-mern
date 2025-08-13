@@ -1,12 +1,12 @@
-import { ILoginUser, IRegisterUser, UserRoleType } from "../dtos/auth.dto";
+import { ILoginUser, IRegisterUser, UserRoleType } from "../dtos";
 import { compareEntity, hashEntity, StatusCodes } from "../utils";
 import { db } from "../db";
 import { UserModel } from "../models";
-import { CustomError } from "../handlers/error.handlers";
-import { findUserByEmail } from "./users.service";
+import { CustomError } from "../handlers";
+import { findUserByEmailService } from "./users.service";
 
 export const registerUserService = async (user: IRegisterUser) => {
-  const userExists = await findUserByEmail(user.email);
+  const userExists = await findUserByEmailService(user.email);
 
   if (userExists.length !== 0) {
     return new CustomError(StatusCodes.Conflict, "User already exists.");
@@ -23,7 +23,7 @@ export const registerUserService = async (user: IRegisterUser) => {
 };
 
 export const loginUserService = async (authData: ILoginUser) => {
-  const userExists = await findUserByEmail(authData.email);
+  const userExists = await findUserByEmailService(authData.email);
 
   if (userExists.length == 0) {
     return new CustomError(StatusCodes.NotFound, "User does not exist.");

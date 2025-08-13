@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { CustomError } from "../handlers/error.handlers";
-import { StatusCodes } from "../utils";
-import { ITokenPayload, verifyToken } from "../utils/jwtGenerator";
-import { UserRoleType } from "../dtos/auth.dto";
+import { CustomError } from "../handlers";
+import { StatusCodes, ITokenPayload, verifyToken } from "../utils";
+
+import { UserRoleType } from "../dtos";
 
 export const AuthTokenMiddleware = async (
   req: any,

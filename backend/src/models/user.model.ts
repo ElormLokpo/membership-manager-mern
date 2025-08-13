@@ -2,6 +2,8 @@ import { pgTable as table, pgEnum } from "drizzle-orm/pg-core";
 import * as t from "drizzle-orm/pg-core";
 import { timestamps } from "../utils";
 import crypto from "crypto";
+import { relations } from "drizzle-orm";
+import { EstablishmentModel } from "./establishment.model";
 
 export const role = pgEnum("role", ["ADMIN", "FRONTDESK", "MEMBER"]);
 
@@ -16,3 +18,7 @@ export const UserModel = table("users", {
   role: role().default("ADMIN"),
   ...timestamps,
 });
+
+export const userRelations = relations(UserModel, ({ many }) => ({
+  establishments: many(EstablishmentModel),
+}));
