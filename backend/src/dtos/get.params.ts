@@ -1,6 +1,6 @@
 export interface IGetParams {
   pageSize: number;
-  pageNumber: number;
+  pageNo: number;
   sortBy: string;
   sortDir: string;
 }
