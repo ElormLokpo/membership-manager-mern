@@ -5,7 +5,7 @@ import crypto from "crypto";
 import { relations } from "drizzle-orm";
 import { EstablishmentModel } from "./establishment.model";
 
-export const role = pgEnum("role", ["ADMIN", "FRONTDESK", "MEMBER"]);
+export const role = pgEnum("role", ["ADMIN", "STAFF", "MEMBER"]);
 
 export const UserModel = table("users", {
   id: t

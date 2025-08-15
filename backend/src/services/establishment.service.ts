@@ -88,6 +88,8 @@ export const updateEstablishmentService = async (
   if (establishmentFound instanceof CustomError) {
     return establishmentFound;
   } else {
+    
+
     return await db
       .update(EstablishmentModel)
       .set(establishmentDto)
