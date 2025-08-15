@@ -13,7 +13,7 @@ export interface ILoginUser {
   password: string;
 }
 
-export type UserRoleType = "ADMIN" | "FRONTDESK" | "MEMBER";
+export type UserRoleType = "ADMIN" | "STAFF" | "MEMBER";
 
 export interface IAuthResponse {
   token: string;
