@@ -5,6 +5,7 @@ import {
   auth_routes,
   checkins_routes,
   establishments_routes,
+  membership_routes,
   staff_routes,
 } from "./routes/index.ts";
 import {
@@ -41,6 +42,13 @@ APP.use(
   AuthTokenMiddleware,
   AuthorizationMiddleware(["ADMIN"]),
   staff_routes
+);
+
+APP.use(
+  "/api/memberships",
+  AuthTokenMiddleware,
+  AuthorizationMiddleware(["ADMIN", "STAFF"]),
+  membership_routes
 );
 
 APP.use(
