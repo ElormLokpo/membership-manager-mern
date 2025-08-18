@@ -7,6 +7,8 @@ import { GrFilter } from "react-icons/gr";
 import { IoIosAdd } from "react-icons/io";
 import { useContext } from "react";
 import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import axios from "axios";
+import PaystackPop from "@paystack/inline-js";
 
 export const Table = () => {
   const { setModal } = useContext(ModalContext) as IModalContext;
@@ -24,6 +26,35 @@ export const Table = () => {
     ][i % 3],
     notes: `Prefers ${["morning", "afternoon", "evening"][i % 3]} sessions`,
   }));
+
+  const handlePayments = async () => {
+    const apiRes = await axios
+      .post(
+        "http://localhost:5000/api/payments/initialize",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU1RBRkYiLCJpYXQiOjE3NTU0NDgxMDksImV4cCI6MTc1NTUzNDUwOX0.WyTdLkMmX3ysY8NZnyGc1YuLUgrVJ1osonVJXv0A7HQ`,
+          },
+        }
+      )
+      .then((res) => res.data.data)
+      .catch((err) => console.log(err));
+
+    const popup = new PaystackPop();
+    popup.newTransaction({
+      key: import.meta.env.VITE_PAYSTACK_PK_KEY,
+      email: "benedictdev31@gmail.com",
+      amount: 20000,
+      reference: apiRes.reference,
+      onSuccess: async (transaction) => {
+        console.log("Payment success:", transaction);
+      },
+      onCancel: () => {
+        console.log("Payment cancelled");
+      },
+    });
+  };
 
   return (
     <div>
@@ -57,6 +88,13 @@ export const Table = () => {
         </div>
 
         <div className="pr-5">
+          {" "}
+          <Button
+            handler={handlePayments}
+            text="Initialize payment"
+            variant={"table-add"}
+            icon={<IoIosAdd />}
+          />
           <Button
             handler={() => setModal(<>Modalllll</>)}
             text="Add Staff"

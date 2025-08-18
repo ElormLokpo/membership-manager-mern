@@ -6,6 +6,7 @@ import {
   checkins_routes,
   establishments_routes,
   membership_routes,
+  payment_routes,
   staff_routes,
 } from "./routes/index.ts";
 import {
@@ -23,7 +24,7 @@ APP.use(express.json());
 APP.use(express.urlencoded({ extended: true }));
 APP.use(
   cors({
-    origin: ["*"],
+    origin: "*",
     methods: ["POST", "GET", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -49,6 +50,13 @@ APP.use(
   AuthTokenMiddleware,
   AuthorizationMiddleware(["ADMIN", "STAFF"]),
   membership_routes
+);
+
+APP.use(
+  "/api/payments",
+  AuthTokenMiddleware,
+  AuthorizationMiddleware(["ADMIN", "STAFF"]),
+  payment_routes
 );
 
 APP.use(
