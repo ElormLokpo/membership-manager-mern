@@ -70,10 +70,7 @@ export const UpdateMembershipController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const membershipData = await updateMembershipService(
-    req.params.id,
-    req.body
-  );
+  const membershipData = await updateMembershipService(req.params.id, req.body);
 
   if (membershipData instanceof CustomError) {
     return new ResponseHandler(res).errorHandler(
@@ -87,6 +84,8 @@ export const UpdateMembershipController = async (
     "Membership update successful"
   );
 };
+
+//Don't forget renew membership logic.
 
 export const DeleteMembershipController = async (
   req: Request,
