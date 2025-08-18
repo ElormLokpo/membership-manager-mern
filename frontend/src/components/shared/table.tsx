@@ -34,7 +34,7 @@ export const Table = () => {
         {},
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU1RBRkYiLCJpYXQiOjE3NTU0NDgxMDksImV4cCI6MTc1NTUzNDUwOX0.WyTdLkMmX3ysY8NZnyGc1YuLUgrVJ1osonVJXv0A7HQ`,
+          
           },
         }
       )
