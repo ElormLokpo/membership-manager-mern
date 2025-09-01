@@ -9,9 +9,12 @@ import { useContext } from "react";
 import { ModalContext, type IModalContext } from "@/context/ModalContext";
 import axios from "axios";
 import PaystackPop from "@paystack/inline-js";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/redux";
 
 export const Table = () => {
   const { setModal } = useContext(ModalContext) as IModalContext;
+  const token = useSelector((state:RootState)=>state.authReducer.token)
 
   const sampleData = Array.from({ length: 25 }, (_, i) => ({
     id: i + 1,
@@ -31,10 +34,12 @@ export const Table = () => {
     const apiRes = await axios
       .post(
         "http://localhost:5000/api/payments/initialize",
-        {},
+        {
+
+        },
         {
           headers: {
-          
+            Authorization : `Bearer ${token}`
           },
         }
       )
@@ -64,7 +69,7 @@ export const Table = () => {
           <div>
             <Input
               name="search"
-              inputTpye="search"
+              inputType="search"
               variant={"searchTable"}
               icon={<IoIosSearch />}
               placeholder="Search"

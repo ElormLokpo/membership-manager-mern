@@ -1,3 +1,4 @@
+import { store } from "@/redux";
 import axios from "axios";
 
 export const axiosClient = axios.create({
@@ -5,8 +6,8 @@ export const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use((config) => {
-  const token = null;
-
+  const {token} = store.getState().authReducer;
+  
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

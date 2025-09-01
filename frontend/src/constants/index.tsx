@@ -1,5 +1,3 @@
-import { FiSearch } from "react-icons/fi";
-import { LuArchive } from "react-icons/lu";
 import { GrAppsRounded } from "react-icons/gr";
 import { PiBriefcase } from "react-icons/pi";
 import { HiOutlineUsers } from "react-icons/hi2";
@@ -15,24 +13,6 @@ export const routes = {
   transactions: "/dashboard/transactions",
   settings: "/dashboard/settings",
 };
-
-export const sideNavRoutesTop = (
-  searchHandler: unknown,
-  notificationsHandler: unknown
-) => [
-  {
-    text: "Search",
-    route: "/",
-    icon: <FiSearch />,
-    handler: searchHandler,
-  },
-  {
-    text: "Notifications",
-    route: "/",
-    icon: <LuArchive />,
-    handler: notificationsHandler,
-  },
-];
 
 export const adminMainSideNavRoutes = [
   {

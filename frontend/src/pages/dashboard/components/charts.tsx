@@ -20,7 +20,7 @@ export const DashboardCharts = () => {
       </div>
 
       <div className="border rounded-md p-2 col-span-5">
-        <DashboardSideChart />
+        {/* <DashboardSideChart /> */}
       </div>
     </div>
   );
