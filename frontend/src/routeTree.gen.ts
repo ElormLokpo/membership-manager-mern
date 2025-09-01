@@ -12,6 +12,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as CreateEstablishmentRouteImport } from './routes/create-establishment'
 import { Route as DashboardLayoutRouteImport } from './routes/dashboard/_layout'
 import { Route as AuthLayoutRouteImport } from './routes/_auth/_layout'
 import { Route as DashboardLayoutIndexRouteImport } from './routes/dashboard/_layout/index'
@@ -32,6 +33,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateEstablishmentRoute = CreateEstablishmentRouteImport.update({
+  id: '/create-establishment',
+  path: '/create-establishment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardLayoutRoute = DashboardLayoutRouteImport.update({
@@ -80,6 +86,7 @@ const AuthLayoutLoginRoute = AuthLayoutLoginRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/create-establishment': typeof CreateEstablishmentRoute
   '/home': typeof HomeRoute
   '/dashboard': typeof DashboardLayoutRouteWithChildren
   '/login': typeof AuthLayoutLoginRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/': typeof DashboardLayoutIndexRoute
 }
 export interface FileRoutesByTo {
+  '/create-establishment': typeof CreateEstablishmentRoute
   '/home': typeof HomeRoute
   '/dashboard': typeof DashboardLayoutIndexRoute
   '/login': typeof AuthLayoutLoginRoute
@@ -102,6 +110,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/create-establishment': typeof CreateEstablishmentRoute
   '/home': typeof HomeRoute
   '/_auth/_layout': typeof AuthLayoutRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
@@ -117,6 +126,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/create-establishment'
     | '/home'
     | '/dashboard'
     | '/login'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/create-establishment'
     | '/home'
     | '/dashboard'
     | '/login'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/dashboard/transactions'
   id:
     | '__root__'
+    | '/create-establishment'
     | '/home'
     | '/_auth/_layout'
     | '/dashboard'
@@ -152,6 +164,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  CreateEstablishmentRoute: typeof CreateEstablishmentRoute
   HomeRoute: typeof HomeRoute
   AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create-establishment': {
+      id: '/create-establishment'
+      path: '/create-establishment'
+      fullPath: '/create-establishment'
+      preLoaderRoute: typeof CreateEstablishmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/_layout': {
@@ -286,6 +306,7 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  CreateEstablishmentRoute: CreateEstablishmentRoute,
   HomeRoute: HomeRoute,
   AuthLayoutRoute: AuthLayoutRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,

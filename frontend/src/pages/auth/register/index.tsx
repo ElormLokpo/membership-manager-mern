@@ -55,7 +55,7 @@ export const RegisterPage = () => {
             <div className="grid grid-cols-2 gap-5 mb-3">
               <div>
                 <Input
-                  inputTpye="text"
+                  inputType="text"
                   labelText="First Name:"
                   name="firstname"
                   register={register}
@@ -65,7 +65,7 @@ export const RegisterPage = () => {
               </div>
               <div>
                 <Input
-                  inputTpye="text"
+                  inputType="text"
                   labelText="Last Name:"
                   name="lastname"
                   register={register}
@@ -77,7 +77,7 @@ export const RegisterPage = () => {
 
             <div className="mb-3">
               <Input
-                inputTpye="text"
+                inputType="text"
                 labelText="Email Address:"
                 name="email"
                 register={register}
@@ -88,7 +88,7 @@ export const RegisterPage = () => {
 
             <div className="mb-5">
               <Input
-                inputTpye="text"
+                inputType="text"
                 fieldType="password"
                 labelText="Password:"
                 name="password"
