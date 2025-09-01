@@ -6,25 +6,27 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import {
   storeAuthUser,
-  type IAuthUser,
   clearAuthUser,
+  storeToken,
 } from "@/redux/reducers/authReducer";
-import type { IRegisterRequest, IResponse } from "@/types";
+import type { IAuthResponse, IRegisterRequest, IResponse } from "@/types";
 import { useNavigate, type UseNavigateResult } from "@tanstack/react-router";
 import { routes } from "@/constants";
 
-const authSuccessHandler = (
+const authSuccessHandler = ( //pass objects instead...
   data: unknown,
   dispatch: AppDispatch,
   navigate: UseNavigateResult<string>,
-  successText: string
+  successText: string,
+  to?: string
 ) => {
-  const { success, data: userData } = data as IResponse<IAuthUser>;
+  const { success, data: authData } = data as IResponse<IAuthResponse>;
   if (success) {
-    dispatch(storeAuthUser(userData));
+    dispatch(storeAuthUser(authData.user));
+    dispatch(storeToken(authData.token));
 
     navigate({
-      to: "/home",
+      to: to ?? "/dashboard",
     });
   }
   toast.success(successText);
@@ -54,7 +56,8 @@ export const useRegister = () => {
         data,
         dispatch,
         navigate,
-        "Account created successfully"
+        "Account created successfully",
+        "/create-establishment"
       ),
   });
 };

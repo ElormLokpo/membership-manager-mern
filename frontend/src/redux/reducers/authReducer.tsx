@@ -1,26 +1,13 @@
+import type { IAuthResponse } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface IAuthUser {
-  id: string | null;
-  fullname: string | null;
-  email: string | null;
-  token: string | null;
-  membership: string | null;
-  roles: string[] | null;
-}
-
-interface IInitialState {
-  auth_user: IAuthUser | null;
-}
-
-const initialState: IInitialState = {
-  auth_user: {
+const initialState: IAuthResponse = {
+  token: null,
+  user: {
     id: null,
     fullname: null,
     email: null,
-    token: null,
-    membership: null,
-    roles: [],
+    role: null,
   },
 };
 
@@ -29,13 +16,17 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     storeAuthUser: (state, action) => {
-      state.auth_user = action.payload;
+      state.user = action.payload;
+    },
+    storeToken: (state, action) => {
+      state.token = action.payload;
     },
     clearAuthUser: (state) => {
-      state.auth_user = null;
+      state.user = null;
+      state.token = null;
     },
   },
 });
 
-export const { storeAuthUser, clearAuthUser } = authSlice.actions;
+export const { storeAuthUser, storeToken, clearAuthUser } = authSlice.actions;
 export default authSlice.reducer;

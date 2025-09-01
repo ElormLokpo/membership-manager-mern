@@ -45,7 +45,7 @@ export const LoginPage = () => {
           <form onSubmit={handleSubmit(submitHandler)} autoComplete="false">
             <div className="mb-3">
               <Input
-                inputTpye="text"
+                inputType="text"
                 labelText="Email Address:"
                 name="email"
                 register={register}
@@ -56,7 +56,7 @@ export const LoginPage = () => {
 
             <div className="mb-5">
               <Input
-                inputTpye="text"
+                inputType="text"
                 fieldType="password"
                 labelText="Password:"
                 name="password"

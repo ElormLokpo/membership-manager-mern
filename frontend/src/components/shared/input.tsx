@@ -12,7 +12,7 @@ import type {
 interface IInput<T extends FieldValues>
   extends VariantProps<typeof inputVariants> {
   className?: string;
-  inputTpye: string;
+  inputType: string;
   labelText?: string;
   register?: UseFormRegister<T>;
   errors?: FieldErrors<T>;
@@ -23,11 +23,12 @@ interface IInput<T extends FieldValues>
 }
 
 const inputVariants = cva(
-  "border border-stone-200 dark:border-stone-700 focus:outline-stone-300 dark:focus:outline-lime-400 w-full rounded-md text-xs px-2",
+  "border border-stone-200 dark:border-stone-700 focus:outline-stone-300 dark:focus:outline-none w-full rounded-md text-xs px-2",
   {
     variants: {
       variant: {
         auth: `py-3 `,
+        form:`py-2`,
         searchTable: `py-1 flex items-center gap-2`,
       },
     },
@@ -40,7 +41,7 @@ const inputVariants = cva(
 export const Input = <T extends FieldValues>({
   className,
   variant,
-  inputTpye = "text",
+  inputType = "text",
   labelText,
   register,
   name,
@@ -90,5 +91,5 @@ export const Input = <T extends FieldValues>({
     ),
   };
 
-  return inputTypes[inputTpye];
+  return inputTypes[inputType];
 };
