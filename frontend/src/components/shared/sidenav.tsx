@@ -42,7 +42,7 @@ export const SideNav = () => {
   };
 
   return (
-    <div className="h-screen p-3 flex flex-col justify-between">
+    <div className="h-screen bg-stone-100 dark:bg-stone-800 rounded-xl p-3 flex flex-col justify-between">
       <div>
         <div className="flex justify-between mb-10">
           <div className="flex flex-col">
@@ -114,10 +114,7 @@ export const SideNav = () => {
       </div>
 
       <div className="flex justify-between items-end">
-        <div className="flex flex-col">
-          <Typography text={authData?.fullname ?? ""} />
-          <Typography text={authData?.email ?? ""} size={"xs"} />
-        </div>
+       
 
         <div>
           <button
