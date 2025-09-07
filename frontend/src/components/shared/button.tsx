@@ -29,6 +29,8 @@ const buttonVariants = cva(
         cancel:
           "border hover:bg-stone-200 dark:hover:bg-stone-700 dark:border-white py-2 text-xs rounded-sm",
         icon: "p-1.5 hover:border border-stone-400 dark:text-stone-400 text-stone-400 dark:border-stone-500 ",
+        ["dash-def"]: "font-semibold hover:bg-stone-700 bg-black dark:bg-white dark:text-black px-5 py-2 rounded-full text-white",
+        ["dash-sec"]: "font-semibold hover:bg-stone-200 dark:hover:bg-stone-700 border border-black dark:border-white px-5 py-2 rounded-full ",
       },
     },
     defaultVariants: {

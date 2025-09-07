@@ -1,114 +1,129 @@
-import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,  
+  RadialBarChart,
+  PolarRadiusAxis,
+  Label,
+  RadialBar,
+} from "recharts";
 
-const barChartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "oklch(76.8% 0.233 130.85)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "oklch(53.2% 0.157 131.589)",
-  },
-} satisfies ChartConfig;
+export const DashboardBarChart = () => {
+  const data = [
+    { day: "S", value: 40 },
+    { day: "M", value: 60 },
+    { day: "T", value: 74 },
+    { day: "W", value: 90 },
 
-export const DashboardCharts = () => {
-  return (
-    <div className="grid grid-cols-12 gap-3 h-[20rem]">
-      <div className="border rounded-md p-2 col-span-7">
-        <DashboardBarChart />
-      </div>
-
-      <div className="border rounded-md p-2 col-span-5">
-        {/* <DashboardSideChart /> */}
-      </div>
-    </div>
-  );
-};
-
-const DashboardBarChart = () => {
-  const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
+    { day: "T", value: 50 },
+    { day: "F", value: 70 },
+    { day: "S", value: 30 },
+    { day: "T", value: 50 },
+    { day: "F", value: 70 },
+    { day: "S", value: 30 },
+    { day: "T", value: 50 },
+    { day: "F", value: 70 },
+    { day: "S", value: 30 },
   ];
 
+  const highlightedDays = ["W", "F"];
+
   return (
-    <div>
-      <ChartContainer config={barChartConfig} className="min-h-[200px] w-full">
-        <BarChart accessibilityLayer data={chartData}>
-          <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-          <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+    <div className="h-50 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} barSize={50} barGap={8}>
+          <defs>
+            {/* Striped pattern */}
+            <pattern
+              id="striped"
+              patternUnits="userSpaceOnUse"
+              width={8}
+              height={8}
+            >
+              <path d="M0,0 l8,8" stroke="#4CAF50" strokeWidth={2} />
+            </pattern>
+          </defs>
+
+          <XAxis dataKey="day" axisLine={false} tickLine={false} />
+          <YAxis hide />
+          <Tooltip cursor={{ fill: "transparent" }} />
+
+          <Bar dataKey="value" radius={[25, 25, 25, 25]}>
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={
+                  highlightedDays.includes(entry.day)
+                    ? "url(#striped)"
+                    : "#4CAF50"
+                }
+              />
+            ))}
+          </Bar>
         </BarChart>
-      </ChartContainer>
+      </ResponsiveContainer>
     </div>
   );
 };
 
-const sideChartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "oklch(89.7% 0.196 126.665)",
-  },
-  safari: {
-    label: "Safari",
-    color: "oklch(84.1% 0.238 128.85)",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "oklch(76.8% 0.233 130.85)",
-  },
-  edge: {
-    label: "Edge",
-    color: "oklch(64.8% 0.2 131.684)",
-  },
-  other: {
-    label: "Other",
-    color: "oklch(53.2% 0.157 131.589)",
-  },
-} satisfies ChartConfig;
-
-const DashboardSideChart = () => {
-  const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-  ];
-
+export const DashboardDoChart = () => {
+  const chartData = [{ month: "january", desktop: 1260, mobile: 570 }];
   return (
-    <div>
-      <ChartContainer config={sideChartConfig}>
-        <BarChart
-          accessibilityLayer
+    <div className="h-72 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <RadialBarChart
           data={chartData}
-          layout="vertical"
-          margin={{
-            left: 0,
-          }}
+          endAngle={180}
+          innerRadius={80}
+          outerRadius={150}
+          
         >
-          <YAxis
-            dataKey="browser"
-            type="category"
-            tickLine={false}
-            tickMargin={10}
-            axisLine={false}
-            tickFormatter={(value) =>
-              sideChartConfig[value as keyof typeof sideChartConfig]?.label
-            }
+          <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+            <Label
+              content={({ viewBox }) => {
+                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  return (
+                    <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle">
+                      <tspan
+                        x={viewBox.cx}
+                        y={(viewBox.cy || 0) - 16}
+                        className="fill-foreground text-2xl font-bold "
+                      >
+                        41%
+                      </tspan>
+                      <tspan
+                        x={viewBox.cx}
+                        y={(viewBox.cy || 0) + 4}
+                        className="fill-muted-foreground"
+                      >
+                        Increase
+                      </tspan>
+                    </text>
+                  );
+                }
+              }}
+            />
+          </PolarRadiusAxis>
+          <RadialBar
+            dataKey="desktop"
+            stackId="a"
+            cornerRadius={5}
+            fill="#4CAF50"
+            className="stroke-transparent stroke-2"
           />
-          <XAxis dataKey="visitors" type="number" hide />
-
-          <Bar dataKey="visitors" layout="vertical" radius={5} />
-        </BarChart>
-      </ChartContainer>
+          <RadialBar
+            dataKey="mobile"
+            fill="#295e2b"
+            stackId="a"
+            cornerRadius={5}
+            className="stroke-transparent stroke-2"
+          />
+        </RadialBarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

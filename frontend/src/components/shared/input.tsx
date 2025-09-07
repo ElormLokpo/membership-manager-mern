@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ReactElement } from "react";
 import { Typography } from "./typography";
+import { CiSearch } from "react-icons/ci";
 import type {
   FieldErrors,
   FieldValues,
@@ -28,8 +29,9 @@ const inputVariants = cva(
     variants: {
       variant: {
         auth: `py-3 `,
-        form:`py-2`,
+        form: `py-2`,
         searchTable: `py-1 flex items-center gap-2`,
+        search: `flex gap-1 items-center rounded-xl py-1 bg-white dark:bg-black border-0 `,
       },
     },
     defaultVariants: {
@@ -48,7 +50,7 @@ export const Input = <T extends FieldValues>({
   errors,
   fieldType = "text",
   placeholder,
-  icon,
+  
 }: IInput<T>) => {
   const inputTypes: Record<string, ReactElement> = {
     text: (
@@ -85,8 +87,11 @@ export const Input = <T extends FieldValues>({
     ),
     search: (
       <div className={cn(inputVariants({ variant }), className)}>
-        {icon}
-        <input className="w-full py-1 focus:outline-none" placeholder={placeholder} />
+        <CiSearch />
+        <input
+          className="w-full py-1 focus:outline-none"
+          placeholder={placeholder}
+        />
       </div>
     ),
   };

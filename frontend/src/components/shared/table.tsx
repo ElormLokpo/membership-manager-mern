@@ -63,9 +63,9 @@ export const Table = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <div className="flex gap-5 items-center w-[50%] mb-3">
-          <Typography text="Members" />
+      <div className="flex items-center justify-end">
+        <div className="flex gap-5 items-center mb-3">
+         
           <div>
             <Input
               name="search"
@@ -92,48 +92,34 @@ export const Table = () => {
           </div>
         </div>
 
-        <div className="pr-5">
-          {" "}
-          <Button
-            handler={handlePayments}
-            text="Initialize payment"
-            variant={"table-add"}
-            icon={<IoIosAdd />}
-          />
-          <Button
-            handler={() => setModal(<>Modalllll</>)}
-            text="Add Staff"
-            variant={"table-add"}
-            icon={<IoIosAdd />}
-          />
-        </div>
+        
       </div>
 
-      <div>
-        <table className="table-auto w-full text-xs">
+      <div className="rounded-md">
+        <table className="table-auto w-full  text-xs">
           <thead>
-            <tr className="">
-              <th className="border-b border-t px-2 py-2">ID</th>
-              <th className="border px-2 py-2 text-left">Full Name</th>
-              <th className="border px-2 py-2 text-left">Email</th>
-              <th className="border px-2 py-2 text-left">Status</th>
-              <th className="border px-2 py-2 text-left">Last Visit</th>
-              <th className="border px-2 py-2 text-left">Location</th>
-              <th className="border-b border-t px-2 py-2 text-left">Notes</th>
+            <tr className=" ">
+              <th className="border-b px-2 py-3">Photo</th>
+              <th className="border-b px-2 py-3 text-left">Full Name</th>
+              <th className="border-b px-2 py-3 text-left">Email</th>
+              <th className="border-b px-2 py-3 text-left">Status</th>
+              <th className="border-b px-2 py-3 text-left">Last Visit</th>
+              <th className="border-b px-2 py-3 text-left">Location</th>
+              <th className="border-b px-2 py-3 text-left">Notes</th>
             </tr>
           </thead>
           <tbody>
             {sampleData.map((member) => (
               <tr key={member.id}>
-                <td className="border-b px-2 py-4">{member.id}</td>
-                <td className="border px-2 py-4">{member.fullName}</td>
-                <td className="border px-2 py-4">{member.email}</td>
-                <td className="border px-2 py-4">{member.status}</td>
-                <td className="border px-2 py-4">
+                <td className=" px-2 py-6">{member.id}</td>
+                <td className=" px-2 py-6">{member.fullName}</td>
+                <td className=" px-2 py-6">{member.email}</td>
+                <td className=" px-2 py-6">{member.status}</td>
+                <td className=" px-2 py-6">
                   {new Date(member.lastVisit).toLocaleDateString()}
                 </td>
-                <td className="border px-2 py-4">{member.preferredLocation}</td>
-                <td className="border-b px-2 py-4">{member.notes}</td>
+                <td className=" px-2 py-6">{member.preferredLocation}</td>
+                <td className=" px-2 py-6">{member.notes}</td>
               </tr>
             ))}
           </tbody>

@@ -1,9 +1,9 @@
 import { Table } from "@/components/shared/table"
 
 
-export const DashboardTable = ()=>{
+export const StaffTable = ()=>{
     return(
-        <div className="border rounded-md p-2">
+        <div className="bg-white rounded-xl p-2">
             <Table />
         </div>
     )
