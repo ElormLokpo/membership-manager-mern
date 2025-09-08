@@ -1,38 +1,21 @@
 import { adminMainSideNavRoutes } from "@/constants";
 import { ThemeToggler } from "./themeToggler";
 import { Typography } from "./typography";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { TbCircleDotted } from "react-icons/tb";
-import { AiOutlineDelete } from "react-icons/ai";
-import { BiLogOut } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "@tanstack/react-router";
+import { useSelector } from "react-redux";
 import type { RootState } from "@/redux";
-import { clearAuthUser } from "@/redux/reducers/authReducer";
 import { Button } from "./button";
 import { FiPlus } from "react-icons/fi";
 import { useContext } from "react";
 import { ModalContext, type IModalContext } from "@/context/ModalContext";
 import { CreateEstablishmentModal } from "@/pages/dashboard/establishments/create-establishment/create-establishment-page";
+import { EstablishmentFlow } from "@/pages/dashboard/establishments/establishment-flow";
 
 export const SideNav = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const { setModal, setDirection } = useContext(ModalContext) as IModalContext;
 
   const sideNavStyle =
     "flex hover:cursor-pointer hover:dark:bg-stone-800 hover:bg-stone-200 p-2 rounded-md mb-2 gap-2 items-center";
-
-  const organizations = [
-    {
-      id: "Org 1",
-      name: "Organization",
-    },
-    {
-      id: "Org 2",
-      name: "Organization",
-    },
-  ];
 
   const authData = useSelector((state: RootState) => state.authReducer.user);
 
@@ -87,47 +70,14 @@ export const SideNav = () => {
               </div>
             </div>
 
-            {organizations.map((item, index) => {
-              return (
-                <div
-                  className={sideNavStyle + " justify-between group"}
-                  key={index}
-                >
-                  <div className="flex gap-3 items-center">
-                    <TbCircleDotted />
-                    <Typography text={item.name} />
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      console.log("delete clicked" + item.id);
-                    }}
-                    className="opacity-0 group-hover:opacity-100 hover:cursor-pointer dark:hover:bg-stone-600 p-1 rounded-sm"
-                  >
-                    <AiOutlineDelete className="text-red-400" />
-                  </button>
-                </div>
-              );
-            })}
+            <div className="max-h-[20rem] overflow-y-auto no-scrollbar ">
+              <EstablishmentFlow />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-between items-end">
-       
-
-        <div>
-          <button
-            onClick={() => {
-              dispatch(clearAuthUser());
-              navigate({ to: "/login" });
-            }}
-            className="hover:cursor-pointer hover:border dark:hover:bg-stone-800 p-2 rounded"
-          >
-            <BiLogOut />
-          </button>
-        </div>
-      </div>
+      <div className="flex justify-between items-end"></div>
     </div>
   );
 };

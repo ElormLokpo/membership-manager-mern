@@ -79,6 +79,26 @@ export const getEstablishmentByIdService = async (id: string) => {
   return establishmentData;
 };
 
+export const getEstablishmentByOwnerService = async (ownerId: string) => {
+  if (!isValidId(ownerId)) {
+    return new CustomError(StatusCodes.BadRequest, "Invalid Id.");
+  }
+
+  const establishmentData = await db
+    .select()
+    .from(EstablishmentModel)
+    .where(eq(EstablishmentModel.ownerId, ownerId));
+
+  if (establishmentData.length == 0) {
+    return new CustomError(
+      StatusCodes.NotFound,
+      "Establishment with owner id does not exist"
+    );
+  }
+
+  return establishmentData;
+};
+
 export const updateEstablishmentService = async (
   id: string,
   establishmentDto: Partial<CreateEstablishmentType>
@@ -88,8 +108,6 @@ export const updateEstablishmentService = async (
   if (establishmentFound instanceof CustomError) {
     return establishmentFound;
   } else {
-    
-
     return await db
       .update(EstablishmentModel)
       .set(establishmentDto)

@@ -144,3 +144,8 @@
     --chart-5: oklch(53.2% 0.157 131.589);
   }
 }
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
