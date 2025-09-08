@@ -657,12 +657,12 @@ export const CreateEstablishmentModal = () => {
           </div>
 
           <div className="flex justify-end">
-            <div className="w-[8rem]">
+            <div className="">
               <Button
                 buttonType="submit"
                 isLoading={isPending}
                 loadingText="Creating establishment"
-                variant={"next"}
+                variant={"dash-def"}
                 text={"Create establishment"}
               />
             </div>

@@ -7,6 +7,7 @@ import {
   deleteEstablishmentService,
   getAllEstablishmentsService,
   getEstablishmentByIdService,
+  getEstablishmentByOwnerService,
   updateEstablishmentService,
 } from "../services";
 
@@ -50,6 +51,28 @@ export const GetEstablishmentByIdController = async (
   next: NextFunction
 ) => {
   const establishmentData = await getEstablishmentByIdService(req.params.id);
+
+  if (establishmentData instanceof CustomError) {
+    return new ResponseHandler(res).errorHandler(
+      establishmentData.statusCode,
+      establishmentData.message
+    );
+  }
+
+  return new ResponseHandler(res).successDataHandler(
+    StatusCodes.Success,
+    "Establishment query successful",
+    establishmentData
+  );
+};
+
+
+export const GetEstablishmentByOwnerController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const establishmentData = await getEstablishmentByOwnerService(req.params.id);
 
   if (establishmentData instanceof CustomError) {
     return new ResponseHandler(res).errorHandler(
