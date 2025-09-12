@@ -1,6 +1,7 @@
 import { Typography } from "@/components/shared/typography";
 import {
   useDeleteEstablishmentByOwner,
+  useGetEstablishmentById,
   useGetEstablishmentByOwner,
 } from "@/hooks/establishmentHook";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -12,6 +13,7 @@ import type { RootState } from "@/redux";
 import { useContext, useEffect, useState } from "react";
 import { ModalContext, type IModalContext } from "@/context/ModalContext";
 import { DeleteModal } from "@/components/shared/modal";
+import { CreateEstablishmentModal } from "../create-establishment/create-establishment-page";
 
 export const EstablishmentFlow = () => {
   const [currentEs, setCurrentEs] = useState<string | null>(null);
@@ -62,7 +64,10 @@ export const EstablishmentFlow = () => {
               <div>
                 <button
                   onClick={() => {
-                    console.log("delete clicked" + item.id);
+                    setDirection("center");
+                    setModal(
+                      <CreateEstablishmentModal establishmentId={item.id} />
+                    );
                   }}
                   className="opacity-0 group-hover:opacity-100 hover:cursor-pointer dark:hover:bg-stone-600 p-1 rounded-sm"
                 >

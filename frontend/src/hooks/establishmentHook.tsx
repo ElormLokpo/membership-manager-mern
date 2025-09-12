@@ -18,7 +18,7 @@ export const useCreateEstablishment = () => {
         | Partial<FullEstablishmentType>
     ) => await axiosClient.post("/establishments/add", establishmentData),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:["establishment-by-owner"]})
+      queryClient.invalidateQueries({ queryKey: ["establishment-by-owner"] });
       toast.success("Your establishment has been created successfully!");
 
       navigate({
@@ -27,6 +27,38 @@ export const useCreateEstablishment = () => {
     },
     onError: (error: unknown) => {
       console.log("Establishment creation error", error);
+    },
+  });
+};
+
+export const useUpdateEstablishment = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: async ({
+      establishmentData,
+      establishmentId
+    }:{
+      establishmentData:
+        | Partial<CreateEstablishmentType>
+        | Partial<FullEstablishmentType>,
+      establishmentId?: string
+    }
+    ) =>
+      await axiosClient.patch(
+        `/establishments/${establishmentId}`,
+        establishmentData
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["establishment-by-owner"] });
+      toast.success("Your establishment has been updated successfully!");
+
+      navigate({
+        to: "/dashboard",
+      });
+    },
+    onError: (error: unknown) => {
+      console.log("Establishment update error", error);
     },
   });
 };
@@ -41,22 +73,29 @@ export const useGetEstablishmentByOwner = () => {
   });
 };
 
+export const useGetEstablishmentById = (establishmentId: string) => {
+  return useQuery({
+    queryKey: ["establishment-by-id"],
+    queryFn: async () =>
+      await axiosClient.get(`/establishments/${establishmentId}`),
+    enabled: !!establishmentId,
+  });
+};
 
-export const useDeleteEstablishmentByOwner = ()=>{
+export const useDeleteEstablishmentByOwner = () => {
   const queryClient = useQueryClient();
-  const {setModal} = useContext(ModalContext) as IModalContext
-  
+  const { setModal } = useContext(ModalContext) as IModalContext;
+
   return useMutation({
-    mutationFn: async (
-     id:string
-    ) => await axiosClient.delete(`/establishments/${id}`),
+    mutationFn: async (id: string) =>
+      await axiosClient.delete(`/establishments/${id}`),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:["establishment-by-owner"]})
+      queryClient.invalidateQueries({ queryKey: ["establishment-by-owner"] });
       toast.success("Your establishment has been deleted successfully!");
-      setModal(null)
+      setModal(null);
     },
     onError: (error: unknown) => {
       console.log("Establishment creation error", error);
     },
   });
-}
+};
