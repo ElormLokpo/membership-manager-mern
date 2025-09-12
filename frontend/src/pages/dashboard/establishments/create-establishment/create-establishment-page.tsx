@@ -19,7 +19,11 @@ import {
 import type { CreateEstablishmentType } from "@/types";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/redux";
-import { useCreateEstablishment } from "@/hooks/establishmentHook";
+import {
+  useCreateEstablishment,
+  useGetEstablishmentById,
+  useUpdateEstablishment,
+} from "@/hooks/establishmentHook";
 import { Button } from "@/components/shared/button";
 import { ModalContext, type IModalContext } from "@/context/ModalContext";
 import { ModalTop } from "@/components/shared/sheet";
@@ -423,25 +427,52 @@ const OperationInfoForm = () => {
   );
 };
 
-export const CreateEstablishmentModal = () => {
+export const CreateEstablishmentModal = ({
+  establishmentId,
+}: {
+  establishmentId?: string;
+}) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     resolver: zodResolver(FullEstablishmentFormSchema),
   });
+
+  const getResponse = useGetEstablishmentById(establishmentId as string);
+
+  const establishmentGetData = getResponse?.data?.data[0];
+
+  useEffect(() => {
+    if (establishmentId) {
+      console.log(establishmentId);
+      console.log("GET DATA", establishmentGetData);
+      reset(establishmentGetData);
+    }
+  }, [establishmentId, establishmentGetData, reset]);
 
   const ownerId = useSelector((store: RootState) => store.authReducer.user?.id);
 
   const { setModal } = useContext(ModalContext) as IModalContext;
 
   const { mutate: createEstablishment, isPending } = useCreateEstablishment();
+  const { mutate: updateEstablishment, isPending: isUpdatePending } =
+    useUpdateEstablishment();
 
   const submitHandler = async (data: FullEstablishmentType) => {
     if (ownerId) {
       console.log("DATA", { ...data, ownerId });
-      createEstablishment({ ...data, ownerId });
+
+      if (establishmentId) {
+        updateEstablishment({
+          establishmentId,
+          establishmentData: { ...data, ownerId },
+        });
+      } else {
+        createEstablishment({ ...data, ownerId });
+      }
       setModal(null);
     }
   };
@@ -455,7 +486,9 @@ export const CreateEstablishmentModal = () => {
     >
       <div>
         <ModalTop
-          title="Create Establishment"
+          title={
+            establishmentId ? "Edit Establishment" : "Create Establishment"
+          }
           subTitle="Kindly fill the form below with your establishment details."
         />
       </div>
@@ -660,10 +693,18 @@ export const CreateEstablishmentModal = () => {
             <div className="">
               <Button
                 buttonType="submit"
-                isLoading={isPending}
-                loadingText="Creating establishment"
+                isLoading={establishmentId ? isUpdatePending : isPending}
+                loadingText={
+                  establishmentId
+                    ? "Updating establishment..."
+                    : "Creating establishment..."
+                }
                 variant={"dash-def"}
-                text={"Create establishment"}
+                text={
+                  establishmentId
+                    ? "Edit establishment"
+                    : "Create establishment"
+                }
               />
             </div>
           </div>
