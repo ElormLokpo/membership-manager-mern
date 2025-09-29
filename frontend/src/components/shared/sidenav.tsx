@@ -25,7 +25,7 @@ export const SideNav = () => {
   };
 
   return (
-    <div className="h-screen bg-stone-100 dark:bg-stone-800 rounded-xl p-3 flex flex-col justify-between">
+    <div className="h-screen bg-stone-100 dark:bg-black dark:border rounded-xl p-3 flex flex-col justify-between">
       <div>
         <div className="flex justify-between mb-10">
           <div className="flex flex-col">

@@ -484,7 +484,7 @@ export const CreateEstablishmentModal = ({
         e.stopPropagation();
       }}
     >
-      <div>
+      <div className="mb-3">
         <ModalTop
           title={
             establishmentId ? "Edit Establishment" : "Create Establishment"

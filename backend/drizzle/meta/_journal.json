@@ -57,6 +57,13 @@
       "when": 1755340757070,
       "tag": "0007_colorful_zaladane",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1757705298383,
+      "tag": "0008_wealthy_mulholland_black",
+      "breakpoints": true
     }
   ]
 }

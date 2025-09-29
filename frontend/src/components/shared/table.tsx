@@ -11,10 +11,11 @@ import axios from "axios";
 import PaystackPop from "@paystack/inline-js";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/redux";
+import { getProfilePhoto } from "@/lib/utils";
 
 export const Table = () => {
   const { setModal } = useContext(ModalContext) as IModalContext;
-  const token = useSelector((state:RootState)=>state.authReducer.token)
+  const token = useSelector((state: RootState) => state.authReducer.token);
 
   const sampleData = Array.from({ length: 25 }, (_, i) => ({
     id: i + 1,
@@ -34,12 +35,10 @@ export const Table = () => {
     const apiRes = await axios
       .post(
         "http://localhost:5000/api/payments/initialize",
-        {
-
-        },
+        {},
         {
           headers: {
-            Authorization : `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
         }
       )
@@ -65,7 +64,6 @@ export const Table = () => {
     <div>
       <div className="flex items-center justify-end">
         <div className="flex gap-5 items-center mb-3">
-         
           <div>
             <Input
               name="search"
@@ -91,8 +89,6 @@ export const Table = () => {
             />
           </div>
         </div>
-
-        
       </div>
 
       <div className="rounded-md">
@@ -111,7 +107,15 @@ export const Table = () => {
           <tbody>
             {sampleData.map((member) => (
               <tr key={member.id}>
-                <td className=" px-2 py-6">{member.id}</td>
+                <td className=" px-2 py-6 flex items-center justify-center">
+                  {" "}
+                  <img
+                    className="w-[2rem] h-[2rem] border rounded-full"
+                    src={getProfilePhoto()}
+                  />
+                </td>
+
+                {/* <td className=" px-2 py-6">{member.id}</td> */}
                 <td className=" px-2 py-6">{member.fullName}</td>
                 <td className=" px-2 py-6">{member.email}</td>
                 <td className=" px-2 py-6">{member.status}</td>

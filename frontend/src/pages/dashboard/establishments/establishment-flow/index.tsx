@@ -1,7 +1,6 @@
 import { Typography } from "@/components/shared/typography";
 import {
   useDeleteEstablishmentByOwner,
-  useGetEstablishmentById,
   useGetEstablishmentByOwner,
 } from "@/hooks/establishmentHook";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -14,10 +13,13 @@ import { useContext, useEffect, useState } from "react";
 import { ModalContext, type IModalContext } from "@/context/ModalContext";
 import { DeleteModal } from "@/components/shared/modal";
 import { CreateEstablishmentModal } from "../create-establishment/create-establishment-page";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const EstablishmentFlow = () => {
   const [currentEs, setCurrentEs] = useState<string | null>(null);
   const { setModal, setDirection } = useContext(ModalContext) as IModalContext;
+
+  const queryClient = useQueryClient();
 
   const dispatch = useDispatch();
   const { data: establishmentResponse } = useGetEstablishmentByOwner();
@@ -33,8 +35,11 @@ export const EstablishmentFlow = () => {
   }, [dispatch, establishmentResponse]);
 
   useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["get-all-staff"],
+    });
     setCurrentEs(currentEstablishmentId);
-  }, [currentEstablishmentId]);
+  }, [currentEstablishmentId, queryClient]);
 
   const { mutate: deleteEstablishment } = useDeleteEstablishmentByOwner();
 
@@ -48,7 +53,9 @@ export const EstablishmentFlow = () => {
         (item: { name: string; id: string }, index: number) => {
           return (
             <button
-              onClick={() => dispatch(storeCurrentEstablishmentId(item.id))}
+              onClick={() => {
+                dispatch(storeCurrentEstablishmentId(item.id));
+              }}
               className={
                 currentEs == item.id
                   ? "bg-stone-300 dark:bg-stone-600 w-full flex hover:cursor-pointer hover:dark:bg-stone-700 hover:bg-stone-400 p-2 rounded-md mb-2 gap-2 items-center justify-between group"

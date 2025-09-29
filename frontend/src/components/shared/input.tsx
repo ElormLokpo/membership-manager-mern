@@ -10,10 +10,15 @@ import type {
   UseFormRegister,
 } from "react-hook-form";
 
+interface OptionsType {
+  display: string;
+  value: string;
+}
+
 interface IInput<T extends FieldValues>
   extends VariantProps<typeof inputVariants> {
   className?: string;
-  inputType: string;
+  inputType?: string;
   labelText?: string;
   register?: UseFormRegister<T>;
   errors?: FieldErrors<T>;
@@ -21,6 +26,7 @@ interface IInput<T extends FieldValues>
   fieldType?: string;
   placeholder?: string;
   icon?: ReactElement;
+  optionsArr?: OptionsType[];
 }
 
 const inputVariants = cva(
@@ -50,7 +56,7 @@ export const Input = <T extends FieldValues>({
   errors,
   fieldType = "text",
   placeholder,
-  
+  optionsArr,
 }: IInput<T>) => {
   const inputTypes: Record<string, ReactElement> = {
     text: (
@@ -75,6 +81,44 @@ export const Input = <T extends FieldValues>({
           )}
           placeholder={placeholder}
         />
+
+        {errors?.[name] && (
+          <span className="mt-1">
+            <p className="text-xs text-red-500">
+              {errors[name]?.message as string}
+            </p>
+          </span>
+        )}
+      </div>
+    ),
+
+    select: (
+      <div className="flex flex-col">
+        {labelText && (
+          <label>
+            <Typography
+              size={"xs"}
+              text={labelText}
+              className={errors?.[name] && "text-red-500"}
+            />
+          </label>
+        )}
+        <select
+          defaultValue={optionsArr && (optionsArr[0].value as string)}
+          autoComplete="false"
+          {...(register ? register(name) : {})}
+          className={cn(
+            inputVariants({ variant }),
+            className,
+            errors?.[name] && "border-red-500 dark:border-red-500"
+          )}
+        >
+          {optionsArr?.map(({ display, value }, index) => (
+            <option key={index} value={value} className="dark:bg-black">
+              {display}
+            </option>
+          ))}
+        </select>
 
         {errors?.[name] && (
           <span className="mt-1">

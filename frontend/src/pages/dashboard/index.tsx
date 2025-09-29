@@ -76,7 +76,7 @@ export const DashboardPage = () => {
   ];
 
   return (
-    <div className="h-screen w-full bg-stone-100 dark:bg-stone-800 rounded-lg my-2">
+    <div className="h-screen w-full bg-stone-100 dark:bg-black rounded-lg my-2">
       <div className="p-5 h-screen">
         <div className="col-span-9">
           <div className="mb-4 flex justify-between">
@@ -110,14 +110,14 @@ export const DashboardPage = () => {
           <div className="grid grid-cols-12 gap-2 mb-3">
             <div className="col-span-9">
               <div className="h-[15rem] grid grid-cols-12 mb-3 gap-2">
-                <div className="bg-white dark:bg-black rounded-xl col-span-9 p-2">
+                <div className="bg-white dark:bg-black dark:border rounded-xl col-span-9 p-2">
                   <div className="mb-1">
                     <Typography text="Analytics" className="font-semibold" />
                   </div>
                   <DashboardBarChart />
                 </div>
 
-                <div className="col-span-3 bg-white dark:bg-black rounded-xl p-2.5">
+                <div className="col-span-3 bg-white dark:bg-black dark:border rounded-xl p-2.5">
                   <div className="mb-6">
                     <Typography
                       text="New Members This Month"
@@ -150,7 +150,7 @@ export const DashboardPage = () => {
               </div>
 
               <div className="h-[20rem] grid grid-cols-12 gap-2">
-                <div className="bg-white dark:bg-black rounded-xl col-span-7 p-3">
+                <div className="bg-white dark:bg-black dark:border rounded-xl col-span-7 p-3">
                   <div className="mb-1">
                     <Typography
                       text="Recent transactions"
@@ -190,7 +190,7 @@ export const DashboardPage = () => {
                   </div>
                 </div>
 
-                <div className="col-span-5 bg-white dark:bg-black rounded-xl p-2.5">
+                <div className="col-span-5 bg-white dark:bg-black dark:border rounded-xl p-2.5">
                   <div className="mb-6">
                     <Typography
                       text="Revenue Estimation"
@@ -205,7 +205,7 @@ export const DashboardPage = () => {
               </div>
             </div>
 
-            <div className="col-span-3 bg-white dark:bg-black rounded-lg p-3">
+            <div className="col-span-3 bg-white dark:bg-black dark:border rounded-lg p-3">
               <div className="mb-3">
                 <Typography text="Recent Members" className="font-semibold" />
               </div>
