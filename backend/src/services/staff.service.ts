@@ -71,6 +71,34 @@ export const getStaffByIdService = async (staffId: string) => {
   return staffData;
 };
 
+export const getStaffByEstablishmentService = async (establishmentId: string) => {
+  if (!isValidId(establishmentId)) {
+    return new CustomError(StatusCodes.BadRequest, "Invalid Id.");
+  }
+
+  const staffData = await db
+    .select({
+      staff: StaffModel,
+      user: {
+        fullname: UserModel.fullname,
+        email: UserModel.email,
+      },
+    })
+    .from(StaffModel)
+    .where(eq(StaffModel.establishmentId, establishmentId))
+    .innerJoin(UserModel, eq(StaffModel.userId, UserModel.id));
+
+  if (staffData.length == 0) {
+    return new CustomError(
+      StatusCodes.NotFound,
+      "Staff with establishment id does not exist"
+    );
+  }
+
+  return staffData;
+};
+
+
 export const updateStaffService = async (
   staffId: string,
   staffDto: ICreateStaff

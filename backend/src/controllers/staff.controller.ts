@@ -6,6 +6,7 @@ import {
   createStaffService,
   deleteStaffService,
   getAllStaffService,
+  getStaffByEstablishmentService,
   getStaffByIdService,
   updateStaffService,
 } from "../services";
@@ -50,6 +51,27 @@ export const GetStaffByIdController = async (
   next: NextFunction
 ) => {
   const staffData = await getStaffByIdService(req.params.id);
+
+  if (staffData instanceof CustomError) {
+    return new ResponseHandler(res).errorHandler(
+      staffData.statusCode,
+      staffData.message
+    );
+  }
+
+  return new ResponseHandler(res).successDataHandler(
+    StatusCodes.Success,
+    "Staff query successful",
+    staffData
+  );
+};
+
+export const GetStaffByEstablishmentController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const staffData = await getStaffByEstablishmentService(req.params.id);
 
   if (staffData instanceof CustomError) {
     return new ResponseHandler(res).errorHandler(

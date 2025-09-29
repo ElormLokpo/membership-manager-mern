@@ -42,7 +42,7 @@ export const ModalTop = ({ title, subTitle }: IModalTop) => {
   const { setModal, setDirection } = useContext(ModalContext) as IModalContext;
 
   return (
-    <div className="mb-5 flex justify-between">
+    <div className="flex justify-between">
       <div className="flex flex-col gap-1">
         <Typography text={title} className="font-semibold" size={"medium"} />
         <Typography text={subTitle ?? ""} className="" size={"xs"} />

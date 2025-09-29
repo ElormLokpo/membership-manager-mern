@@ -53,7 +53,7 @@ export const DashboardCards = ({
             className={
               index == activeIndex
                 ? "px-3 py-6 rounded-xl bg-[#4CAF50]"
-                : "px-3 py-6 rounded-xl bg-white dark:bg-black"
+                : "px-3 py-6 rounded-xl bg-white dark:bg-black dark:border"
             }
             key={index}
           >

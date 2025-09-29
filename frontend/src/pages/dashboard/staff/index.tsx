@@ -2,10 +2,15 @@ import { Button } from "@/components/shared/button";
 import { Typography } from "@/components/shared/typography";
 import { DashboardCards } from "../components/cards";
 import { StaffTable } from "./components/table";
+import { useContext } from "react";
+import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { AddStaffForm } from "./components/form";
 
 export const StaffPage = () => {
+  const {setModal, setDirection} = useContext(ModalContext) as IModalContext
+
   return (
-    <div className="h-screen w-full bg-stone-100 rounded-lg my-2">
+    <div className="h-screen w-full bg-stone-100 dark:bg-black dark:border rounded-lg my-2">
       <div className="p-5 h-screen">
         <div className="col-span-9">
           <div className="mb-4 flex justify-between">
@@ -24,7 +29,10 @@ export const StaffPage = () => {
 
             <div className="flex gap-2">
               <div>
-                <Button text={`Add Staff`} variant={"dash-def"} />
+                <Button text={`Add Staff`} variant={"dash-def"} handler={()=>{
+                    setDirection("center")
+                    setModal(<AddStaffForm />)
+                }} />
               </div>
               <div>
                 <Button text={`Import Data`} variant={"dash-sec"} />
@@ -36,7 +44,7 @@ export const StaffPage = () => {
             <DashboardCards activeIndex={1} />
           </div>
 
-          <div className="">
+          <div className="dark:border rounded-lg">
             <StaffTable />
           </div>
         </div>

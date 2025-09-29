@@ -13,7 +13,7 @@ export const TopNav = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-stone-100 dark:bg-stone-800 py-2.5 pl-1.5 pr-10 rounded-xl flex justify-between items-center">
+    <div className="bg-stone-100 dark:bg-black dark:border py-2.5 pl-1.5 pr-10 rounded-xl flex justify-between items-center">
       <div className="w-[25%]">
         <Input
           inputType="search"
@@ -25,7 +25,7 @@ export const TopNav = () => {
 
       <div className="flex gap-6 items-center">
         <div className="flex gap-2 items-center">
-          <div className="bg-white dark:bg-black rounded-full p-2 hover:cursor-pointer">
+          <div className="bg-white dark:bg-black dark:border rounded-full p-2 hover:cursor-pointer">
             <MdOutlineEmail />
           </div>
 
@@ -35,7 +35,7 @@ export const TopNav = () => {
                 dispatch(clearAuthUser());
                 navigate({ to: "/login" });
               }}
-              className="bg-white dark:bg-black rounded-full p-2 hover:cursor-pointer"
+              className="bg-white dark:bg-black dark:border rounded-full p-2 hover:cursor-pointer"
             >
               <BiLogOut />
             </button>

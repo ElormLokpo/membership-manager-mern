@@ -30,29 +30,70 @@ export interface IAuthResponse {
   user: (Omit<Partial<IUser>, "role"> & { role: UserRoleType | null }) | null;
 }
 
-
 //Establishment data
 
 export type CreateEstablishmentType = {
-    name: string;
-    franchiseName?: string | null | undefined;
-    type?: string | null | undefined;
-    contactInfo?: {
+  name: string;
+  franchiseName?: string | null | undefined;
+  type?: string | null | undefined;
+  contactInfo?:
+    | {
         email: string;
         phone: string;
         website: string;
-    } | null | undefined;
-    locationInfo?: {
+      }
+    | null
+    | undefined;
+  locationInfo?:
+    | {
         country: string;
         city: string;
         address: string;
         landmark: string;
-    } | null | undefined;
-    establishmentStatus?: "ACTIVE" | "INACTIVE" | null | undefined;
-    operatingHours?: string | null | undefined;
-    ownerId?: string | null | undefined;
-    capacityMetrics?: {
+      }
+    | null
+    | undefined;
+  establishmentStatus?: "ACTIVE" | "INACTIVE" | null | undefined;
+  operatingHours?: string | null | undefined;
+  ownerId?: string | null | undefined;
+  capacityMetrics?:
+    | {
         maxMembers: string;
         maxDailyVisitors: string;
-    } | null | undefined;
+      }
+    | null
+    | undefined;
+};
+
+//Staff type
+export type CreateStaffType = {
+  staffId?: string | undefined;
+  createdAt?: Date | null | undefined;
+  updatedAt?: Date | null | undefined;
+  userId?: string | null | undefined;
+  establishmentId?: string | null | undefined;
+  photo?: string | null | undefined;
+  position?: "FRONTDESK" | null | undefined;
+  employmentType?: "FULL-TIME" | "PART-TIME" | "CONTRACT" | null | undefined;
+  shift?: "MORNING" | "AFTERNOON" | "EVENING" | null | undefined;
+  hireDate?: string | null | undefined;
+};
+
+export interface IGetAllStaff {
+  staff: {
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    staffId: string;
+    userId: string | null;
+    establishmentId: string | null;
+    photo: string | null;
+    position: "FRONTDESK" | null;
+    employmentType: "FULL-TIME" | "PART-TIME" | "CONTRACT" | null;
+    shift: "MORNING" | "AFTERNOON" | "EVENING" | null;
+    hireDate: string | null;
+  };
+  user: {
+    fullname: string;
+    email: string;
+  };
 }
