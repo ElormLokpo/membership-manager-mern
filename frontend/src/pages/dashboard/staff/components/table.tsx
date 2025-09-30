@@ -1,5 +1,5 @@
 import { useGetAllStaff } from "@/hooks/staffHook";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -16,16 +16,31 @@ import { MdSort } from "react-icons/md";
 import { GrFilter } from "react-icons/gr";
 import { Typography } from "@/components/shared/typography";
 import { FiTrash, FiEdit2 } from "react-icons/fi";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
-import { useModal } from "@/hooks/modalHook";
+
+import { useModal } from "@/hooks/contextHooks";
 import { AddStaffForm } from "./form";
 import { DeleteModal } from "@/components/shared/modal";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/redux";
+import { useQueryClient } from "@tanstack/react-query";
+import type { IModalContext } from "@/context/ModalContext";
 
 const columnHelper = createColumnHelper<IGetAllStaff>();
 
 export const StaffTable = () => {
   const { data: staffResponse } = useGetAllStaff();
   const tableData: IGetAllStaff[] = staffResponse?.data;
+  const queryClient = useQueryClient();
+
+  const currentEstablishmentId = useSelector(
+    (store: RootState) => store.establishmentReducer.currentEstablishmentId
+  );
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["get-all-staff"],
+    });
+  }, [currentEstablishmentId, queryClient]);
 
   const columns = [
     columnHelper.accessor("staff.photo", {
@@ -77,14 +92,18 @@ export const StaffTable = () => {
               className="flex gap-1 items-center hover:cursor-pointer"
             >
               <FiTrash className="text-red-500 dark:text-red-500" />
-              <Typography text="Delete" className="text-red-500 dark:text-red-500" size={"xs"} />
+              <Typography
+                text="Delete"
+                className="text-red-500 dark:text-red-500"
+                size={"xs"}
+              />
             </button>
           </div>
         </div>
       ),
     }),
   ];
-  const { setModal, setDirection } = useModal();
+  const { setModal, setDirection } = useModal() as IModalContext;
 
   const editHandler = (userId: unknown) => {
     console.log("idddd", userId);

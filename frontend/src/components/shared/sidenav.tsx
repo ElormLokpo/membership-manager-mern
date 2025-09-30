@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/redux";
 import { Button } from "./button";
 import { FiPlus } from "react-icons/fi";
-import { useContext } from "react";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { type IModalContext } from "@/context/ModalContext";
 import { CreateEstablishmentModal } from "@/pages/dashboard/establishments/create-establishment/create-establishment-page";
 import { EstablishmentFlow } from "@/pages/dashboard/establishments/establishment-flow";
+import { useModal } from "@/hooks/contextHooks";
 
 export const SideNav = () => {
-  const { setModal, setDirection } = useContext(ModalContext) as IModalContext;
+  const { setModal, setDirection } = useModal() as IModalContext;
 
   const sideNavStyle =
     "flex hover:cursor-pointer hover:dark:bg-stone-800 hover:bg-stone-200 p-2 rounded-md mb-2 gap-2 items-center";

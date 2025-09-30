@@ -2,7 +2,7 @@ import { Input } from "@/components/shared/input";
 import { ThemeToggler } from "@/components/shared/themeToggler";
 import { Typography } from "@/components/shared/typography";
 import { useForm, useWatch } from "react-hook-form";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CreateEstablishmentTopNav, FormButtons } from "./components";
 import { CreateEstContext, useCreateEstContext } from "./context";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,8 +25,9 @@ import {
   useUpdateEstablishment,
 } from "@/hooks/establishmentHook";
 import { Button } from "@/components/shared/button";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import {  type IModalContext } from "@/context/ModalContext";
 import { ModalTop } from "@/components/shared/sheet";
+import { useModal } from "@/hooks/contextHooks";
 
 export const CreateEstablishmentPage = () => {
   const [activeIndex, setActiveIndex] = useState<number>(1);
@@ -455,7 +456,7 @@ export const CreateEstablishmentModal = ({
 
   const ownerId = useSelector((store: RootState) => store.authReducer.user?.id);
 
-  const { setModal } = useContext(ModalContext) as IModalContext;
+  const { setModal } = useModal() as IModalContext;
 
   const { mutate: createEstablishment, isPending } = useCreateEstablishment();
   const { mutate: updateEstablishment, isPending: isUpdatePending } =

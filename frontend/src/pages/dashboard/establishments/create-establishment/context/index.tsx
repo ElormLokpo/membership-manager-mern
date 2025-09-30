@@ -1,5 +1,5 @@
 import type { CreateEstablishmentType } from "@/types";
-import { createContext, useContext } from "react";
+import { createContext, useContextSelector } from "use-context-selector";
 
 export interface ICreateEstContext {
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -7,7 +7,9 @@ export interface ICreateEstContext {
   completedSteps: number;
   setCompletedSteps: React.Dispatch<React.SetStateAction<number>>;
   establishmentData: object;
-  setEstablishmentData: React.Dispatch<React.SetStateAction<object | CreateEstablishmentType>>;
+  setEstablishmentData: React.Dispatch<
+    React.SetStateAction<object | CreateEstablishmentType>
+  >;
 }
 
 export const CreateEstContext = createContext<ICreateEstContext | undefined>(
@@ -15,5 +17,12 @@ export const CreateEstContext = createContext<ICreateEstContext | undefined>(
 );
 
 export const useCreateEstContext = () => {
-  return useContext(CreateEstContext) as ICreateEstContext;
+  return useContextSelector(CreateEstContext, (ctx) => ({
+    setActiveIndex: ctx?.setActiveIndex,
+    activeIndex: ctx?.activeIndex,
+    completedSteps: ctx?.completedSteps,
+    setCompletedSteps: ctx?.setCompletedSteps,
+    establishmentData: ctx?.establishmentData,
+    setEstablishmentData: ctx?.setEstablishmentData,
+  })) as ICreateEstContext;
 };
