@@ -1,4 +1,5 @@
-import { createContext, type ReactElement } from "react";
+import { type ReactElement } from "react";
+import {createContext} from "use-context-selector";
 
 export interface IModalContext {
   modal: ReactElement | null;

@@ -1,12 +1,13 @@
 import { Sheet } from "@/components/shared/sheet";
 import { SideNav } from "@/components/shared/sidenav";
 import { TopNav } from "@/components/shared/topnav";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { type IModalContext } from "@/context/ModalContext";
+import { useModal } from "@/hooks/contextHooks";
 import { Outlet } from "@tanstack/react-router";
-import { useContext } from "react";
+
 
 export const DashboardLayout = () => {
-  const { modal } = useContext(ModalContext) as IModalContext;
+  const { modal } = useModal() as IModalContext;
 
   return (
     <div className="bg-white dark:bg-black">

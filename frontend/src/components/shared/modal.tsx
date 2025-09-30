@@ -1,16 +1,19 @@
 import { Button } from "./button";
 import { ModalTop } from "./sheet";
 import { Typography } from "./typography";
+import { type IModalContext } from "@/context/ModalContext";
+import { useModal } from "@/hooks/contextHooks";
 
 export const DeleteModal = ({
-    
   text,
-  handler
+  handler,
 }: {
   text: string;
-  
+
   handler: () => void;
 }) => {
+  const { setModal } = useModal() as IModalContext;
+
   return (
     <div
       className="p-4"
@@ -28,7 +31,13 @@ export const DeleteModal = ({
 
       <div className="flex items-end justify-end gap-2">
         <div>
-          <Button text={`Cancel`} variant={"dash-sec"} />
+          <Button
+            text={`Cancel`}
+            variant={"dash-sec"}
+            handler={() => {
+              setModal(null);
+            }}
+          />
         </div>
         <div>
           <Button

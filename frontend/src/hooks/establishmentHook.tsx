@@ -1,12 +1,12 @@
 import { axiosClient } from "@/api";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { type IModalContext } from "@/context/ModalContext";
 import { store } from "@/redux";
 import type { FullEstablishmentType } from "@/schema/establishmentSchema";
 import type { CreateEstablishmentType } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { useContext } from "react";
 import { toast } from "sonner";
+import { useModal } from "./contextHooks";
 
 export const useCreateEstablishment = () => {
   const queryClient = useQueryClient();
@@ -84,7 +84,7 @@ export const useGetEstablishmentById = (establishmentId: string) => {
 
 export const useDeleteEstablishmentByOwner = () => {
   const queryClient = useQueryClient();
-  const { setModal } = useContext(ModalContext) as IModalContext;
+  const { setModal } = useModal() as IModalContext;
 
   return useMutation({
     mutationFn: async (id: string) =>

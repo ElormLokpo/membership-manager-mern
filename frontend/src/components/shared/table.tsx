@@ -1,20 +1,18 @@
 import { Button } from "./button";
 import { Input } from "./input";
-import { Typography } from "./typography";
 import { IoIosSearch } from "react-icons/io";
 import { MdSort } from "react-icons/md";
 import { GrFilter } from "react-icons/gr";
-import { IoIosAdd } from "react-icons/io";
-import { useContext } from "react";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { type IModalContext } from "@/context/ModalContext";
 import axios from "axios";
 import PaystackPop from "@paystack/inline-js";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/redux";
 import { getProfilePhoto } from "@/lib/utils";
+import { useModal } from "@/hooks/contextHooks";
 
 export const Table = () => {
-  const { setModal } = useContext(ModalContext) as IModalContext;
+  const { setModal } = useModal() as IModalContext;
   const token = useSelector((state: RootState) => state.authReducer.token);
 
   const sampleData = Array.from({ length: 25 }, (_, i) => ({

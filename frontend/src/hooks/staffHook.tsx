@@ -1,10 +1,10 @@
 import { axiosClient } from "@/api";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { type IModalContext } from "@/context/ModalContext";
 import { store } from "@/redux";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { useContext } from "react";
 import { toast } from "sonner";
+import { useModal } from "./contextHooks";
 
 type CreateStaff = {
   authData: {
@@ -25,7 +25,7 @@ type CreateStaff = {
 export const useCreateStaff = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { setModal } = useContext(ModalContext) as IModalContext;
+  const { setModal } = useModal() as IModalContext;
 
   return useMutation({
     mutationFn: async (staffData: CreateStaff) =>

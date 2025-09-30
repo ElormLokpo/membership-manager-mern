@@ -1,12 +1,11 @@
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
-import { useContext, type ReactElement } from "react";
+import { type IModalContext } from "@/context/ModalContext";
+import { type ReactElement } from "react";
 import { Typography } from "./typography";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { useModal } from "@/hooks/contextHooks";
 
 export const Sheet = ({ modal }: { modal: ReactElement }) => {
-  const { setModal, direction, setDirection } = useContext(
-    ModalContext
-  ) as IModalContext;
+  const { setModal, direction, setDirection } = useModal() as IModalContext;
 
   const modalDirections: Record<string, ReactElement> = {
     right: (
@@ -39,7 +38,7 @@ export interface IModalTop {
   subTitle?: string;
 }
 export const ModalTop = ({ title, subTitle }: IModalTop) => {
-  const { setModal, setDirection } = useContext(ModalContext) as IModalContext;
+  const { setModal, setDirection } = useModal() as IModalContext;
 
   return (
     <div className="flex justify-between">
@@ -50,7 +49,7 @@ export const ModalTop = ({ title, subTitle }: IModalTop) => {
 
       <div>
         <button
-        className="hover:cursor-pointer"
+          className="hover:cursor-pointer"
           onClick={() => {
             setModal(null);
             setDirection("center");

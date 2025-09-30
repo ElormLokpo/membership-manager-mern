@@ -1,9 +1,10 @@
-import { ThemeContext, type IThemeContext } from "@/context/ThemeContext";
+import type { IThemeContext } from "@/context/ThemeContext";
+import { useTheme } from "@/hooks/contextHooks";
 import { CloudSunIcon, MoonIcon } from "@phosphor-icons/react";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 export const ThemeToggler = () => {
-  const { theme, setTheme } = useContext(ThemeContext) as IThemeContext;
+  const { theme, setTheme } = useTheme() as IThemeContext;
 
   useEffect(() => {
     const root = window.document.documentElement;

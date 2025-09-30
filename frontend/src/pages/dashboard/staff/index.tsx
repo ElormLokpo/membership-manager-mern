@@ -2,12 +2,12 @@ import { Button } from "@/components/shared/button";
 import { Typography } from "@/components/shared/typography";
 import { DashboardCards } from "../components/cards";
 import { StaffTable } from "./components/table";
-import { useContext } from "react";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { type IModalContext } from "@/context/ModalContext";
 import { AddStaffForm } from "./components/form";
+import { useModal } from "@/hooks/contextHooks";
 
 export const StaffPage = () => {
-  const {setModal, setDirection} = useContext(ModalContext) as IModalContext
+  const {setModal, setDirection} = useModal() as IModalContext
 
   return (
     <div className="h-screen w-full bg-stone-100 dark:bg-black dark:border rounded-lg my-2">

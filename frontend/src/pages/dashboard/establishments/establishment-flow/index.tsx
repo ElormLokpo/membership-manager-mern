@@ -9,17 +9,15 @@ import { FiEdit2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { storeCurrentEstablishmentId } from "@/redux/reducers/establishmentReducer";
 import type { RootState } from "@/redux";
-import { useContext, useEffect, useState } from "react";
-import { ModalContext, type IModalContext } from "@/context/ModalContext";
+import { useEffect, useState } from "react";
+import { type IModalContext } from "@/context/ModalContext";
 import { DeleteModal } from "@/components/shared/modal";
 import { CreateEstablishmentModal } from "../create-establishment/create-establishment-page";
-import { useQueryClient } from "@tanstack/react-query";
+import { useModal } from "@/hooks/contextHooks";
 
 export const EstablishmentFlow = () => {
   const [currentEs, setCurrentEs] = useState<string | null>(null);
-  const { setModal, setDirection } = useContext(ModalContext) as IModalContext;
-
-  const queryClient = useQueryClient();
+  const { setModal, setDirection } = useModal() as IModalContext;
 
   const dispatch = useDispatch();
   const { data: establishmentResponse } = useGetEstablishmentByOwner();
@@ -35,11 +33,8 @@ export const EstablishmentFlow = () => {
   }, [dispatch, establishmentResponse]);
 
   useEffect(() => {
-    queryClient.invalidateQueries({
-      queryKey: ["get-all-staff"],
-    });
     setCurrentEs(currentEstablishmentId);
-  }, [currentEstablishmentId, queryClient]);
+  }, [currentEstablishmentId]);
 
   const { mutate: deleteEstablishment } = useDeleteEstablishmentByOwner();
 
