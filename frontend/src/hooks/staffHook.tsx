@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useModal } from "./contextHooks";
+import axios from "axios";
 
 type CreateStaff = {
   authData: {
@@ -53,3 +54,11 @@ export const useGetAllStaff = () => {
       await axiosClient.get(`/staff/establishment/${establishmentId}`),
   });
 };
+
+
+export const useUpdaetStaff =  ()=>{
+
+  return useMutation({
+    mutationFn: async ()=> await axiosClient.patch(``)
+  })
+}
