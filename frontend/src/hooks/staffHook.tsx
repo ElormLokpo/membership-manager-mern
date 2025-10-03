@@ -55,10 +55,10 @@ export const useGetAllStaff = () => {
   });
 };
 
+export const useGetStaff = () => {};
 
-export const useUpdaetStaff =  ()=>{
-
+export const useUpdaetStaff = () => {
   return useMutation({
-    mutationFn: async ()=> await axiosClient.patch(``)
-  })
-}
+    mutationFn: async () => await axiosClient.patch(``),
+  });
+};
