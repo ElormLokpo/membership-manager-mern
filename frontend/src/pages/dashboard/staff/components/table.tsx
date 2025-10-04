@@ -6,7 +6,6 @@ import {
   getCoreRowModel,
   useReactTable,
   type Cell,
-  type CellContext,
 } from "@tanstack/react-table";
 import { type IGetAllStaff } from "@/types";
 import { Input } from "@/components/shared/input";
@@ -105,13 +104,12 @@ export const StaffTable = () => {
   ];
   const { setModal, setDirection } = useModal() as IModalContext;
 
-  const editHandler = (userId: unknown) => {
-    console.log("idddd", userId);
+  const editHandler = (staffId: unknown) => {
     setDirection("center");
-    setModal(<AddStaffForm staffId={userId as string} />);
+    setModal(<AddStaffForm staffId={staffId as string} />);
   };
 
-  const deleteHandler = (userId: unknown, fullname: unknown) => {
+  const deleteHandler = (staffId: unknown, fullname: unknown) => {
     setDirection("center");
     setModal(
       <DeleteModal
