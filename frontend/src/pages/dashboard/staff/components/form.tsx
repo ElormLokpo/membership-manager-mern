@@ -2,7 +2,7 @@ import { Button } from "@/components/shared/button";
 import { Input } from "@/components/shared/input";
 import { ModalTop } from "@/components/shared/sheet";
 import { Typography } from "@/components/shared/typography";
-import { useCreateStaff } from "@/hooks/staffHook";
+import { useCreateStaff, useGetStaff } from "@/hooks/staffHook";
 import { generatePassword, getProfilePhoto } from "@/lib/utils";
 import type { RootState } from "@/redux";
 import { staffSchema, type staffType } from "@/schema/staffSchema";
@@ -37,6 +37,12 @@ export const AddStaffForm = ({ staffId }: { staffId?: string }) => {
     { display: "Afternoon shift", value: "AFTERNOON" },
     { display: "Evening shift", value: "EVENING" },
   ];
+
+  const staffGetResponse = useGetStaff(staffId as string);
+
+  const staffData = staffGetResponse.data?.data[0];
+
+  console.log("STAFF DATA", staffData);
 
   const positionArr = [{ display: "Front desk clerk", value: "FRONTDESK" }];
 
